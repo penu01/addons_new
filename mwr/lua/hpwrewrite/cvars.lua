@@ -41,7 +41,7 @@ HpwRewrite.CVars.DebugMode = CreateConVar("hpwrewrite_sv_debugmode", "0", { FCVA
 local value = "0"
 if game.SinglePlayer() then value = "1" end
 HpwRewrite.CVars.NoLearning = CreateConVar("hpwrewrite_sv_nolearning", value, { FCVAR_ARCHIVE, FCVAR_REPLICATED, FCVAR_NOTIFY })
-HpwRewrite.CVars.GiveWand = CreateConVar("hpwrewrite_sv_givewand", value, { FCVAR_ARCHIVE, FCVAR_NOTIFY })
+HpwRewrite.CVars.GiveWand = CreateConVar("hpwrewrite_sv_givewand", "1", { FCVAR_ARCHIVE, FCVAR_NOTIFY })
 
 HpwRewrite.CVars.DisableThrowing = CreateConVar("hpwrewrite_sv_nothrowing", "0", { FCVAR_ARCHIVE })
 HpwRewrite.CVars.NoAccuracy = CreateConVar("hpwrewrite_sv_noaccuracy", "0", { FCVAR_ARCHIVE })
@@ -71,7 +71,7 @@ if CLIENT then
 	HpwRewrite.CVars.NoChoosing = CreateClientConVar("hpwrewrite_cl_nochoosing", "0", true, false)
 	HpwRewrite.CVars.NoTextIfIcon = CreateClientConVar("hpwrewrite_cl_notexticon", "0", true, false)
 
-	HpwRewrite.CVars.MmorpgStyle = CreateClientConVar("hpwrewrite_cl_mmorpgstyle", "1", true, false)
+	HpwRewrite.CVars.MmorpgStyle = CreateClientConVar("hpwrewrite_cl_mmorpgstyle", "0", true, false)
 	HpwRewrite.CVars.DrawIcons = CreateClientConVar("hpwrewrite_cl_drawicons", "1", true, false)
 	HpwRewrite.CVars.DrawSpellName = CreateClientConVar("hpwrewrite_cl_drawspname", "1", true, false)
 	HpwRewrite.CVars.DrawHint = CreateClientConVar("hpwrewrite_cl_drawhint", "1", true, false)
