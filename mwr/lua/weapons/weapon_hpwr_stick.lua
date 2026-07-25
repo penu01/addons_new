@@ -459,7 +459,7 @@ else
 
 	function SWEP:HPWSetWandSkin(name)
 		local wep = self.Owner:GetActiveWeapon()
-		if wep != self then HpwRewrite:LogDebug(self.Owner:Name() .. "'s weapon isn't wand, cannot change skin!") return end
+		if wep ~= self then HpwRewrite:LogDebug(self.Owner:Name() .. "'s weapon isn't wand, cannot change skin!") return end
 
 		local isDefSkin = false
 
@@ -899,10 +899,10 @@ function SWEP:OnRemove()
 
 	if IsValid(self.Owner) then
 		local lastSpell = self:GetWandCurrentSpell() 
-		if lastSpell != "" then self.Owner:SetPData("WeaponHpwrStick_LastSpell", lastSpell) end
+		if lastSpell ~= "" then self.Owner:SetPData("WeaponHpwrStick_LastSpell", lastSpell) end
 
 		local lastSkin = self:GetWandCurrentSkin()
-		if lastSkin != "" then self.Owner:SetPData("WeaponHpwrStick_LastSkin", lastSkin) end
+		if lastSkin ~= "" then self.Owner:SetPData("WeaponHpwrStick_LastSkin", lastSkin) end
 	end 
 end
 
@@ -1141,7 +1141,7 @@ function SWEP:Think()
 				self.HpwRewrite.ShouldSetPos = false
 			end
 
-			if bind and bind.Spell != self.HpwRewrite.CurrentSpellPr then
+			if bind and bind.Spell ~= self.HpwRewrite.CurrentSpellPr then
 				HpwRewrite:RequestSpell(bind.Spell)
 				self.HpwRewrite.CurrentSpellPr = bind.Spell
 			end
@@ -1155,7 +1155,7 @@ function SWEP:Think()
 			local oldpressed = self.HpwRewrite.WasMenuKeyPressed
 			self.HpwRewrite.WasMenuKeyPressed = key >= 107 and input.IsMouseDown(key) or input.IsKeyDown(key)
 
-			if oldpressed != self.HpwRewrite.WasMenuKeyPressed and self.HpwRewrite.WasMenuKeyPressed then
+			if oldpressed ~= self.HpwRewrite.WasMenuKeyPressed and self.HpwRewrite.WasMenuKeyPressed then
 				if self:GetWandCurrentSkin() == "" then
 					HpwRewrite:RequestSpell(HpwRewrite.DefaultSkin)
 				end
@@ -1166,7 +1166,7 @@ function SWEP:Think()
 		end
 	end
 
-	if self.OldOwner != nil and self.OldOwner != self.Owner then
+	if self.OldOwner ~= nil and self.OldOwner ~= self.Owner then
 		self:Initialize()
 	end
 
