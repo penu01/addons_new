@@ -1,7 +1,0 @@
-"LightmappedGeneric"
-{
-	"$basetexture" "hpwrewrite/decals/fireball"
-	"$decal" 1
-  	"$decalscale" 0.12
-   	"$vertexalpha" 1
-}

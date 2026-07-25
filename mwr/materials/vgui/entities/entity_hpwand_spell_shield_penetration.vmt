@@ -1,6 +1,0 @@
-"UnlitGeneric"
-{
-	"$basetexture" "vgui/entities/entity_hpwand_spell_shield_penetration"
-	"$vertexalpha" 1
-	"$vertexcolor" 1
-}
