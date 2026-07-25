@@ -44,7 +44,7 @@ HpwRewrite.CVars.NoLearning = CreateConVar("hpwrewrite_sv_nolearning", value, { 
 HpwRewrite.CVars.GiveWand = CreateConVar("hpwrewrite_sv_givewand", "1", { FCVAR_ARCHIVE, FCVAR_NOTIFY })
 
 HpwRewrite.CVars.DisableThrowing = CreateConVar("hpwrewrite_sv_nothrowing", "0", { FCVAR_ARCHIVE })
-HpwRewrite.CVars.NoAccuracy = CreateConVar("hpwrewrite_sv_noaccuracy", "0", { FCVAR_ARCHIVE })
+HpwRewrite.CVars.NoAccuracy = CreateConVar("hpwrewrite_sv_noaccuracy", "1", { FCVAR_ARCHIVE })
 HpwRewrite.CVars.NoSay = CreateConVar("hpwrewrite_sv_nosay", "0", { FCVAR_ARCHIVE })
 HpwRewrite.CVars.NoTimer = CreateConVar("hpwrewrite_sv_notimer", "0", { FCVAR_ARCHIVE })
 HpwRewrite.CVars.AlwaysCenter = CreateConVar("hpwrewrite_sv_spawncenter", "0", { FCVAR_ARCHIVE })
