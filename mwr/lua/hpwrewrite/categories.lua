@@ -9,3 +9,5 @@ HpwRewrite.CategoryNames.Physics = HpwRewrite.Language:GetWord("#category_physic
 HpwRewrite.CategoryNames.Protecting = HpwRewrite.Language:GetWord("#category_protecting")
 HpwRewrite.CategoryNames.Special = HpwRewrite.Language:GetWord("#category_special")
 HpwRewrite.CategoryNames.Unforgivable = HpwRewrite.Language:GetWord("#category_unforgivable")
+
+HpwRewrite.CategoryNames.pnu = HpwRewrite.Language:GetWord("#category_pnu")

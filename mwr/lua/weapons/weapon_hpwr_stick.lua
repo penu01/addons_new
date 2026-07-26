@@ -777,11 +777,12 @@ end
 function SWEP:Initialize()
 	if self.HpwRewrite then table.Empty(self.HpwRewrite) end
 
-	self.HpwRewrite = { }
-	self.HpwRewrite.SequenceDuration = 0
-	self.HpwRewrite.AnimationSpeed = 1
-	self.HpwRewrite.BlockSprite = false
-	self.HpwRewrite.LastAttackerSpellName = nil
+self.HpwRewrite = { }
+self.HpwRewrite.SequenceDuration = 0
+self.HpwRewrite.AnimationSpeed = 1
+self.HpwRewrite.BlockSprite = false
+self.HpwRewrite.LastAttackerSpellName = nil
+self.HpwRewrite.SpellCooldowns = { }		-- YENI: her buyu icin ayri cooldown saati (spellName -> CurTime())
 
 	if CLIENT then 
 		self.HpwRewrite.PrintHelp = true 
@@ -923,8 +924,9 @@ function SWEP:Deploy(anim)
 	if self.Owner:IsNPC() then print("Wand won't handle NPC owner! Removing...") self:Remove() return end
 	if not self.Owner:IsPlayer() then print("Wand owner should be a player! Removing...") self:Remove() return end
 
-	if not self.HpwRewrite then
+if not self.HpwRewrite then
 		self.HpwRewrite = { }
+		self.HpwRewrite.SpellCooldowns = { }
 		ErrorNoHalt("Wand's HpwRewrite table has been initialized in the Deploy function! Please, contact addon's developers\n")
 	end
 
@@ -1004,8 +1006,22 @@ function SWEP:PrimaryAttack(spellName)
 	local name = curspell
 	if not self:CheckSpellUseable(name) then self:EmptySpellAttack() return end
 
-	curspell = HpwRewrite:GetPlayerSpell(self.Owner, name)
-	if not curspell then self:EmptySpellAttack() return end
+curspell = HpwRewrite:GetPlayerSpell(self.Owner, name)
+if not curspell then self:EmptySpellAttack() return end
+
+-- YENI: spell-ozel cooldown kontrolu (asayi degil, sadece bu buyuyu kilitler)
+if not self.HpwRewrite.SpellCooldowns then self.HpwRewrite.SpellCooldowns = { } end
+
+if curspell.ForceDelay then
+	local cd = self.HpwRewrite.SpellCooldowns[name]
+	if cd and CurTime() < cd then
+		if SERVER then
+			local kalan = math.ceil(cd - CurTime())
+			HpwRewrite:DoNotify(self.Owner, "Bu buyu " .. kalan .. " saniye sonra kullanilabilir!", NOTIFY_ERROR, 2)
+		end
+		return -- bu buyu hala kendi cooldown'unda, digerleri etkilenmez
+	end
+end
 
 	self.HpwRewrite.AnimationSpeed = curspell.AnimSpeedCoef or 1
 	self.HoldingSelfCast = curspell.ShouldReverseSelfCast
@@ -1058,7 +1074,7 @@ function SWEP:PrimaryAttack(spellName)
 		self.HpwRewrite.DidAnimations = true
 	end
 
-	if curspell.ForceDelay then self:SetNextPrimaryFire(CurTime() + curspell.ForceDelay) end
+if curspell.ForceDelay then self.HpwRewrite.SpellCooldowns[name] = CurTime() + curspell.ForceDelay end
 
 	-- Fire, fire, FIRE !!!
 	if SERVER and not self.Owner.HpwRewrite.BlockSpelling then -- The second expression is for Mimblewimble and so on
